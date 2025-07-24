@@ -1,0 +1,52 @@
+{
+    "env": {
+      "browser": true,
+      "es2021": true,
+    },
+    "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended", "plugin:prettier/recommended"],
+    "overrides": [],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "ecmaVersion": "latest",
+      "sourceType": "module",
+    },
+    "plugins": ["@typescript-eslint", "import", "simple-import-sort"],
+    "rules": {
+      "no-case-declarations": "warn",
+      "no-empty-function": "off",
+      "@typescript-eslint/no-var-requires": "off",
+      "@typescript-eslint/no-empty-function": "off",
+      "linebreak-style": "off",
+      "import/first": "error",
+      "import/newline-after-import": "error",
+      "import/no-duplicates": "error",
+      "no-debugger": "warn",
+      "@typescript-eslint/no-explicit-any": ["warn"],
+      "@typescript-eslint/no-unused-vars": ["warn"],
+      "@typescript-eslint/array-type": ["warn", { "default": "array" }],
+      "quotes": ["error", "single"],
+      "no-irregular-whitespace": "warn",
+      "no-useless-escape": "warn",
+  
+      "simple-import-sort/imports": [
+        "warn",
+        {
+          "groups": [
+            [
+              "^(assert|buffer|child_process|cluster|console|constants|crypto|dgram|dns|domain|events|fs|http|https|module|net|os|path|punycode|querystring|readline|repl|stream|string_decoder|sys|timers|tls|tty|url|util|vm|zlib|freelist|v8|process|async_hooks|http2|perf_hooks)(/.*|$)",
+            ],
+            ["^react", "^@?\\w"],
+            ["^shared", "^assets", "^router", "^services", "^stores"],
+            ["^pages", "^components"],
+            ["^\\u0000"],
+            ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
+            ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"],
+            ["^.+\\.s?css$"],
+          ],
+        },
+      ],
+  
+      "max-len": ["warn", { "code": 120, "tabWidth": 4 }],
+    },
+  }
+  
