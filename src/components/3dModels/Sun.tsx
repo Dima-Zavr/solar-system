@@ -10,7 +10,7 @@ export const Sun = () => {
     
     return (
       <mesh ref={sunRef}>
-        <sphereGeometry args={[5, 32, 32]} />
+        <sphereGeometry args={[45, 32, 32]} />
         <meshStandardMaterial 
           map={sunTexture} 
           emissiveMap={sunTexture}
