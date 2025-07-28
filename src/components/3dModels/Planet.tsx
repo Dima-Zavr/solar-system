@@ -2,9 +2,11 @@ import { useRef } from 'react';
 import * as THREE from 'three';
 import { useFrame } from '@react-three/fiber';
 import type { IPlanetData } from '../../shared/interfaces/PlanetData';
+import { OrbitLine } from './OrbitLine';
+import { PlanetRings } from './PlanetRings';
 
 interface IPlanetProps {
-  planetData: IPlanetData
+  planetData: IPlanetData;
 }
 
 export const Planet = ({ planetData }: IPlanetProps) => {
@@ -22,12 +24,9 @@ export const Planet = ({ planetData }: IPlanetProps) => {
 
   const planetRef = useRef<THREE.Mesh>(null);
 
-  // Рассчитываем малую полуось
-  //const semiMinorAxis = semiMajorAxis * Math.sqrt(1 - eccentricity * eccentricity);
-
   // Рассчитываем скорости вращения
-  const rotationSpeed = (2 * Math.PI) / dayDuration; // Радиан в секунду
-  const orbitSpeed = (2 * Math.PI) / yearDuration; // Радиан в секунду
+  const rotationSpeed = (2 * Math.PI) / dayDuration;
+  const orbitSpeed = (2 * Math.PI) / yearDuration;
 
   // Загружаем текстуру планеты
   const textureLoader = new THREE.TextureLoader();
@@ -58,17 +57,15 @@ export const Planet = ({ planetData }: IPlanetProps) => {
   });
 
   return (
-    <group rotation={[(axialTilt * Math.PI) / 180, 0, 0]} ref={planetRef} position={[semiMajorAxis, 0, 0]}>
-      <mesh>
-        <sphereGeometry args={[size, 32, 32]} />
-        <meshStandardMaterial map={planetTexture} metalness={0.1} roughness={0.7} />
-      </mesh>
-      {ringUrl && (
-        <mesh rotation={[Math.PI / 2, 0, 0]}>
-          <ringGeometry args={[size + 7, size + 11, 64]} />
-          <meshStandardMaterial map={textureLoader.load(ringUrl)} side={THREE.DoubleSide} transparent={true} />
+    <>
+      <group rotation={[(axialTilt * Math.PI) / 180, 0, 0]} ref={planetRef} position={[semiMajorAxis, 0, 0]}>
+        <mesh>
+          <sphereGeometry args={[size, 32, 32]} />
+          <meshStandardMaterial map={planetTexture} metalness={0.1} roughness={0.7} />
         </mesh>
-      )}
-    </group>
+        {ringUrl && <PlanetRings size={size} ringUrl={ringUrl} />}
+      </group>
+      <OrbitLine semiMajorAxis={semiMajorAxis} eccentricity={eccentricity} inclination={inclination} />
+    </>
   );
 };

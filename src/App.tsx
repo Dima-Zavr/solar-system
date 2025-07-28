@@ -1,89 +1,38 @@
 import { Canvas } from '@react-three/fiber';
-import { Planet } from './components/3dModels/Planet';
-import { OrbitControls, Stars } from '@react-three/drei';
+import { OrbitControls } from '@react-three/drei';
+import { EffectComposer, Bloom } from '@react-three/postprocessing';
+import { BlendFunction } from 'postprocessing';
 import { Sun } from './components/3dModels/Sun';
+import { SpaceBackground } from './components/3dModels/SpaceBackground';
 import PLANET_DATA from './shared/constants/PlanedData';
-import { OrbitLine } from './components/3dModels/OrbitLine';
+import { Planet } from './components/3dModels/Planet';
 
 export const App = () => {
   return (
-    <div style={{ width: '100vw', height: '100vh', background: 'black' }}>
-      <Canvas camera={{ position: [0, 0, 250], fov: 60 }}>
-        <ambientLight intensity={1} />
-        <pointLight position={[0, 0, 0]} intensity={1} />
+    <div style={{ width: '100vw', height: '100vh', background: 'white' }}>
+      <Canvas camera={{ position: [-35, 80, 80], fov: 90 }}>
+        <SpaceBackground url="/src/assets/textures/stars.jpg" />
 
-        {/* Солнце */}
+        <ambientLight intensity={0.5} />
+        <pointLight position={[0, 0, 0]} intensity={500} />
+
         <Sun />
 
-        {/* Меркурий */}
-        <Planet planetData={PLANET_DATA.Mercury} />
-        <OrbitLine
-          semiMajorAxis={PLANET_DATA.Mercury.semiMajorAxis}
-          eccentricity={PLANET_DATA.Mercury.eccentricity}
-          inclination={PLANET_DATA.Mercury.inclination}
-        />
+        {/* Все планеты */}
+        {Object.values(PLANET_DATA).map((data) => (
+          <Planet key={data.name} planetData={data} />
+        ))}
 
-        {/* Венера */}
-        <Planet planetData={PLANET_DATA.Venus} />
-        <OrbitLine
-          semiMajorAxis={PLANET_DATA.Venus.semiMajorAxis}
-          eccentricity={PLANET_DATA.Venus.eccentricity}
-          inclination={PLANET_DATA.Venus.inclination}
-        />
+        <EffectComposer>
+          <Bloom
+            luminanceThreshold={0.1}
+            luminanceSmoothing={0.9}
+            intensity={2.5}
+            blendFunction={BlendFunction.ADD}
+          />
+        </EffectComposer>
 
-        {/* Земля */}
-        <Planet planetData={PLANET_DATA.Earth} />
-        <OrbitLine
-          semiMajorAxis={PLANET_DATA.Earth.semiMajorAxis}
-          eccentricity={PLANET_DATA.Earth.eccentricity}
-          inclination={PLANET_DATA.Earth.inclination}
-        />
-
-        {/* Марс */}
-        <Planet planetData={PLANET_DATA.Mars} />
-        <OrbitLine
-          semiMajorAxis={PLANET_DATA.Mars.semiMajorAxis}
-          eccentricity={PLANET_DATA.Mars.eccentricity}
-          inclination={PLANET_DATA.Mars.inclination}
-        />
-
-        {/* Юпитер */}
-        <Planet planetData={PLANET_DATA.Jupiter} />
-        <OrbitLine
-          semiMajorAxis={PLANET_DATA.Jupiter.semiMajorAxis}
-          eccentricity={PLANET_DATA.Jupiter.eccentricity}
-          inclination={PLANET_DATA.Jupiter.inclination}
-        />
-
-        {/* Сатурн */}
-        <Planet planetData={PLANET_DATA.Saturn} />
-        <OrbitLine
-          semiMajorAxis={PLANET_DATA.Saturn.semiMajorAxis}
-          eccentricity={PLANET_DATA.Saturn.eccentricity}
-          inclination={PLANET_DATA.Saturn.inclination}
-        />
-
-        {/* Уран */}
-        <Planet planetData={PLANET_DATA.Uranus} />
-        <OrbitLine
-          semiMajorAxis={PLANET_DATA.Uranus.semiMajorAxis}
-          eccentricity={PLANET_DATA.Uranus.eccentricity}
-          inclination={PLANET_DATA.Uranus.inclination}
-        />
-
-        {/* Нептун */}
-        <Planet planetData={PLANET_DATA.Neptune} />
-        <OrbitLine
-          semiMajorAxis={PLANET_DATA.Neptune.semiMajorAxis}
-          eccentricity={PLANET_DATA.Neptune.eccentricity}
-          inclination={PLANET_DATA.Neptune.inclination}
-        />
-
-        {/* Космический фон */}
-        <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />
-
-        {/* Орбитальные контролы для управления камерой */}
-        <OrbitControls enableZoom={true} enablePan={false} enableRotate={true} minDistance={100} maxDistance={350} />
+        <OrbitControls enableZoom={true} enablePan={false} enableRotate={true} minDistance={10} maxDistance={470} />
       </Canvas>
     </div>
   );

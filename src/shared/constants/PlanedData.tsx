@@ -1,6 +1,7 @@
 const PLANET_DATA = {
   Mercury: {
-    semiMajorAxis: 60,
+    name: "Mercury",
+    semiMajorAxis: 5.8,
     size: 0.5,
     axialTilt: 2,
     dayDuration: 58.65,
@@ -10,7 +11,8 @@ const PLANET_DATA = {
     url: "/src/assets/textures/mercury.jpg"
   },
   Venus: {
-    semiMajorAxis: 80,
+    name: "Venus",
+    semiMajorAxis: 10.8,
     size: 1.2,
     axialTilt: 177,
     dayDuration: 243.02,
@@ -20,7 +22,8 @@ const PLANET_DATA = {
     url: "/src/assets/textures/venus.jpg"
   },
   Earth: {
-    semiMajorAxis: 100,
+    name: "Earth",
+    semiMajorAxis: 15.0,
     size: 1.2,
     axialTilt: 23,
     dayDuration: 1,
@@ -30,7 +33,8 @@ const PLANET_DATA = {
     url: "/src/assets/textures/earth.jpg"
   },
   Mars: {
-    semiMajorAxis: 120,
+    name: "Mars",
+    semiMajorAxis: 22.8,
     size: 0.7,
     axialTilt: 25,
     dayDuration: 1.03,
@@ -40,7 +44,8 @@ const PLANET_DATA = {
     url: "/src/assets/textures/mars.jpg"
   },
   Jupiter: {
-    semiMajorAxis: 140,
+    name: "Jupiter",
+    semiMajorAxis: 77.8,
     size: 15,
     axialTilt: 3,
     dayDuration: 9.93,
@@ -50,7 +55,8 @@ const PLANET_DATA = {
     url: "/src/assets/textures/jupiter.jpg"
   },
   Saturn: {
-    semiMajorAxis: 180,
+    name: "Saturn",
+    semiMajorAxis: 140,
     size: 12,
     axialTilt: 27,
     dayDuration: 10.57,
@@ -61,7 +67,8 @@ const PLANET_DATA = {
     ringUrl: "/src/assets/textures/saturn_rings.png"
   },
   Uranus: {
-    semiMajorAxis: 220,
+    name: "Uranus",
+    semiMajorAxis: 290,
     size: 5,
     axialTilt: 98,
     dayDuration: 0.72,
@@ -71,7 +78,8 @@ const PLANET_DATA = {
     url: "/src/assets/textures/uranus.jpg"
   },
   Neptune: {
-    semiMajorAxis: 260,
+    name: "Neptune",
+    semiMajorAxis: 450,
     size: 5,
     axialTilt: 30,
     dayDuration: 0.67,
